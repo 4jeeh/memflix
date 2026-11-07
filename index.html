@@ -2,439 +2,672 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memflix - Universal Memory &amp; Celebration Streaming Platform</title>
     <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+      name="description"
+      content="Memflix is an interactive Netflix-inspired celebration and memory streaming platform. Personalize any milestone via URL parameters (?name=Name&title=Special+Title&age=20)."
     />
-    <title>Birthday Special</title>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="jev1.css" />
+    <link rel="stylesheet" href="css/style.css" />
   </head>
-  <body>
-    <div class="night">
-      <div class="shooting_star"></div>
-      <div class="shooting_star"></div>
-      <div class="shooting_star"></div>
-      <div class="shooting_star"></div>
-      <div class="shooting_star"></div>
-      <div class="shooting_star"></div>
-      <div class="shooting_star"></div>
-    </div>
-
-    <section id="page-login" class="page active">
-      <div
-        class="login-bg"
-        style="
-          background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-            url('Netflix Indian Movies and Web Series.jpeg');
-          background-size: cover;
-          background-position: center;
-        "
-      >
-        <div class="login-header">
-          <div class="logo">NETFLIX</div>
-        </div>
-        <div class="login-box">
-          <h1>Masuk</h1>
-          <form id="loginForm">
-            <input
-              type="text"
-              id="loginEmail"
-              placeholder="Email atau nomor ponsel"
-              required
-            />
-            <input
-              type="password"
-              id="loginPassword"
-              placeholder="Sandi"
-              required
-            />
-            <button type="submit" class="btn btn-red login-btn">Masuk</button>
-            <div class="login-error" id="loginError" style="display: none">
-              Maaf, sandi salah. (Hint:jevan112233)
-            </div>
-          </form>
-          <div class="login-or">CLUE</div>
-          <button type="button" class="btn btn-secondary login-btn-sec">
-            Gunakan Sandi Game
-          </button>
-          <div class="login-footer-text"><a href="#">Lupa sandi?</a></div>
-        </div>
-      </div>
-    </section>
-
-    <div class="header" style="display: none" id="mainHeader">
-      <div class="logo">NETFLIX</div>
-      <div class="header-controls">
-        <button id="musicToggle" class="music-toggle" title="Play Music">
-          🔊
-        </button>
-      </div>
-    </div>
-
+  <body data-ui="streaming-app">
+    <!-- Ambient Background Audio -->
     <audio id="bgm" loop preload="auto">
-      <source
-        src="Multo - Cup of Joe (Official Lyric Video).mp3"
-        type="audio/mpeg"
-      />
+      <source src="audio/ambient-theme.mp3" type="audio/mpeg" />
     </audio>
 
-    <section id="page-1" class="page">
-      <div
-        class="hero"
-        style="
-          background: linear-gradient(
-              180deg,
-              rgba(0, 0, 0, 0.4),
-              rgba(0, 0, 0, 0.8)
-            ),
-            url('Netflix Indian Movies and Web Series.jpeg');
-          background-size: cover;
-          background-position: center;
-        "
-      >
-        <div class="hero-inner">
-          <div class="badge">NETFLIX ORIGINAL</div>
-          <div class="hero-title">
-            HAPPY BIRTHDAY — <span id="name-display">KAMU</span>
-          </div>
-          <div class="hero-sub">
-            The little things I do for you — it’s not much, but enjoy.
-          </div>
-          <div class="play-wrap" id="btn-play">
-            <div class="play-btn"><div class="play-icon"></div></div>
-            <div class="play-text">Play Movie</div>
-          </div>
-        </div>
+    <!-- Top Navigation Bar (Visible on Profiles, Browse, Player, Finale) -->
+    <header class="nf-header" id="mainHeader" style="display: none" data-ui="navbar">
+      <div class="nf-header-left">
+        <a href="#browse" class="nf-brand" id="brandLogoBtn" aria-label="Memflix Home">
+          <span class="nf-brand-text">MEMFLIX</span>
+        </a>
+        <nav class="nf-nav" id="mainNav" aria-label="Primary Streaming Navigation">
+          <button type="button" class="nf-nav-link active" data-nav="home">Home</button>
+          <button type="button" class="nf-nav-link" data-nav="episodes">Episodes</button>
+          <button type="button" class="nf-nav-link" data-nav="top10">Top 10 Today</button>
+          <button type="button" class="nf-nav-link" data-nav="mylist">
+            My List <span class="nf-nav-count" id="myListCountBadge">4</span>
+          </button>
+          <button type="button" class="nf-nav-link" data-nav="finale">Grand Finale</button>
+        </nav>
       </div>
-    </section>
 
-    <section id="page-profiles" class="page">
-      <div class="profiles-container">
-        <h1 class="profiles-title">Who's watching?</h1>
-        <div class="profile-grid">
-          <div class="profile-card" id="profile-jevan">
-            <div
-              class="profile-avatar"
-              style="background: linear-gradient(135deg, #e50914, #b0000e)"
-            >
-              <svg
-                viewBox="0 0 100 100"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                class="profile-smiley"
-              >
-                <circle cx="35" cy="35" r="5" fill="white" />
-                <circle cx="65" cy="35" r="5" fill="white" />
-                <path
-                  d="M30 65 Q 50 80 70 65"
-                  stroke="white"
-                  stroke-width="5"
-                  fill="transparent"
-                />
-              </svg>
-            </div>
-            <div class="profile-name">Jevan</div>
-          </div>
-          <div class="profile-card dummy-profile">
-            <div
-              class="profile-avatar"
-              style="background: linear-gradient(135deg, #005c97, #363795)"
-            >
-              <svg
-                viewBox="0 0 100 100"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                class="profile-smiley"
-              >
-                <circle cx="35" cy="35" r="5" fill="white" />
-                <circle cx="65" cy="35" r="5" fill="white" />
-                <path
-                  d="M30 65 Q 50 80 70 65"
-                  stroke="white"
-                  stroke-width="5"
-                  fill="transparent"
-                />
-              </svg>
-            </div>
-            <div class="profile-name">CIO</div>
-          </div>
-          <div class="profile-card dummy-profile">
-            <div
-              class="profile-avatar"
-              style="background: linear-gradient(135deg, #f2994a, #f2c94c)"
-            >
-              <svg
-                viewBox="0 0 100 100"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                class="profile-smiley"
-              >
-                <circle cx="35" cy="35" r="5" fill="white" />
-                <circle cx="65" cy="35" r="5" fill="white" />
-                <path
-                  d="M30 65 Q 50 80 70 65"
-                  stroke="white"
-                  stroke-width="5"
-                  fill="transparent"
-                />
-              </svg>
-            </div>
-            <div class="profile-name">Basket</div>
-          </div>
-          <div class="profile-card dummy-profile">
-            <div
-              class="profile-avatar"
-              style="background: linear-gradient(135deg, #2ecc71, #27ae60)"
-            >
-              <svg
-                viewBox="0 0 100 100"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                class="profile-smiley"
-              >
-                <circle cx="35" cy="35" r="5" fill="white" />
-                <circle cx="65" cy="35" r="5" fill="white" />
-                <path
-                  d="M30 65 Q 50 80 70 65"
-                  stroke="white"
-                  stroke-width="5"
-                  fill="transparent"
-                />
-              </svg>
-            </div>
-            <div class="profile-name">Guest</div>
-          </div>
-        </div>
-        <button class="btn btn-ghost" id="manage-profiles">
-          Manage Profiles
+      <div class="nf-header-right">
+        <button
+          type="button"
+          class="nf-pill-btn"
+          id="openCustomizerBtn"
+          title="Personalize URL parameters (?name=Name&title=Special+Title&age=20)"
+        >
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+          </svg>
+          <span>Personalize URL</span>
+        </button>
+
+        <button
+          type="button"
+          class="nf-icon-btn"
+          id="musicToggle"
+          aria-label="Toggle Background Soundtrack"
+          title="Toggle Background Soundtrack"
+        >
+          <svg id="iconSoundOn" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" style="display: none" aria-hidden="true">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+          </svg>
+          <svg id="iconSoundOff" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+          </svg>
+          <span class="nf-audio-label" id="audioStatusLabel">Sound Off</span>
+        </button>
+
+        <button
+          type="button"
+          class="nf-profile-chip"
+          id="headerProfileBtn"
+          title="Switch Viewer Profile"
+        >
+          <span class="nf-profile-chip-avatar" id="activeProfileDot"></span>
+          <span class="nf-profile-chip-name" id="activeProfileLabel">Guest of Honor</span>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
+            <path d="M7 10l5 5 5-5z"></path>
+          </svg>
         </button>
       </div>
-    </section>
+    </header>
 
-    <section id="page-2" class="page">
-      <div class="browse-hero">
-        <div
-          class="hero-bg-image"
-          style="
-            background-image: url('Screenshot_2025-11-17-12-00-07-65_1c337646f29875672b5a61192b9010f9.jpg');
-          "
-        ></div>
-        <div class="hero-bg-vignette"></div>
-        <div class="hero-content">
-          <div class="hero-logo-text">Jevan</div>
-          <p class="hero-desc">
-            Mr.Axel going 20?? Gila waktu cepet banget. Semoga tahun ini bawa
-            banyak win buat lu Jev. Level up terus, and don't forget keep
-            healthy yahh, HBD!!
+    <main id="appRoot" data-ui="main-shell">
+      <!-- =========================================================
+           SCREEN 1: LOGIN PAGE (#page-login)
+      ========================================================== -->
+      <section id="page-login" class="page active" aria-labelledby="loginHeading">
+        <div class="login-backdrop" style="background-image: url('images/midnight-fireworks.jpg')"></div>
+        <div class="login-vignette"></div>
+
+        <div class="login-topbar">
+          <div class="nf-brand">
+            <span class="nf-brand-text">MEMFLIX</span>
+          </div>
+          <div class="login-topbar-actions">
+            <span class="login-platform-tag">Original Celebration Streaming</span>
+          </div>
+        </div>
+
+        <div class="login-stage">
+          <div class="login-card">
+            <h1 id="loginHeading" class="login-title">Sign In</h1>
+            <p class="login-subtitle" id="loginPersonalSubtitle">
+              Stream curated memories, milestone episodes, and celebration specials in 4K HDR.
+            </p>
+
+            <!-- Primary One-Click Guest Access for GitHub Evaluators & Visitors -->
+            <button type="button" class="btn-guest-demo" id="guestAccessBtn">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                <path d="M8 5v14l11-7z"></path>
+              </svg>
+              <span>Guest Access / One-Click Demo</span>
+            </button>
+
+            <div class="login-divider">
+              <span>Or sign in with account</span>
+            </div>
+
+            <form id="loginForm" novalidate>
+              <div class="nf-field">
+                <label for="loginEmail" class="nf-label">Email or Celebration ID</label>
+                <input
+                  type="text"
+                  id="loginEmail"
+                  name="email"
+                  value="guest@memflix.stream"
+                  placeholder="Enter email or celebration ID"
+                  autocomplete="username"
+                  required
+                />
+              </div>
+              <div class="nf-field">
+                <label for="loginPassword" class="nf-label">Access Passcode</label>
+                <input
+                  type="password"
+                  id="loginPassword"
+                  name="password"
+                  value="celebrate2026"
+                  placeholder="Enter any passcode"
+                  autocomplete="current-password"
+                  required
+                />
+              </div>
+
+              <button type="submit" class="btn-nf-red login-submit-btn">
+                Sign In to Stream
+              </button>
+            </form>
+
+            <div class="login-meta-row">
+              <label class="login-remember">
+                <input type="checkbox" checked />
+                <span>Remember my pass</span>
+              </label>
+              <button type="button" class="login-link-btn" id="loginCustomizeBtn">
+                Personalize URL Parameters
+              </button>
+            </div>
+
+            <div class="login-url-hint">
+              <p>
+                <strong>Dynamic URL Ready:</strong> Append
+                <code>?name=Name&amp;title=Special+Title&amp;age=20</code> to personalize this
+                entire streaming experience for anyone.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 2: WHO'S WATCHING? PROFILES (#page-profiles)
+      ========================================================== -->
+      <section id="page-profiles" class="page" aria-labelledby="profilesHeading">
+        <div class="profiles-container">
+          <h1 id="profilesHeading" class="profiles-title">Who's watching?</h1>
+          <p class="profiles-subtitle" id="profilesSubtitle">
+            Choose a viewer profile to launch your curated celebration dashboard.
           </p>
-          <div class="hero-buttons">
-            <button class="btn-play-new" id="hero-play-button">
-              <svg
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                width="24"
-                height="24"
-              >
-                <path d="M6 4l15 8-15 8z"></path>
-              </svg>
-              Putar
-            </button>
-            <button class="btn-info-new">
-              <svg
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                width="24"
-                height="24"
-              >
-                <path
-                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
-                ></path>
-              </svg>
-              Info
-            </button>
-          </div>
-        </div>
-      </div>
 
-      <div class="browse-content">
-        <div class="content-row">
-          <h2>Trending Now</h2>
-          <div class="poster-scroll-container">
-            <div
-              class="poster-card-new clickable-poster"
-              style="background-image: url('3.jpg')"
-              data-title="MEMORY"
-              data-desc="Kita mulai dari sini, eaaa masih inget ga? ini kamu pake blonde, syibauu :v"
-            ></div>
-            <div
-              class="poster-card-new clickable-poster"
-              style="background-image: url('1.jpg')"
-              data-title="MEMORY"
-              data-desc="VDHOLIC!! aku selalu ngalah lo waktu kamu jadi 'last man standing' 😙 makanya menang, wleee"
-            ></div>
-            <div
-              class="poster-card-new clickable-poster"
-              style="background-image: url('2.jpg')"
-              data-title="MEMORY"
-              data-desc="TY for u'r Mega Bunny, semoga makin sukses bertani yaa..."
-            ></div>
-            <div
-              class="poster-card-new clickable-poster"
-              style="background-image: url('4.jpg')"
-              data-title="MEMORY"
-              data-desc="CONGRATS YA MEGANYA 😒"
-            ></div>
-            <div
-              class="poster-card-new clickable-poster"
-              style="background-image: url('5.jpg')"
-              data-title="MEMORY"
-              data-desc="DEYMM LOOKS SO GREAT BROO (bakal aku bales pake ulti)"
-            ></div>
-          </div>
-        </div>
-        <div class="content-row">
-          <h2>My List</h2>
-          <div class="poster-scroll-container">
-            <div
-              class="poster-card-new clickable-poster"
-              style="background-image: url('6.jpg')"
-              data-title="MEMORY"
-              data-desc="I hope nothing like this happens again. Take care of your health, Jev."
-            ></div>
-            <div
-              class="poster-card-new clickable-poster"
-              style="background-image: url('7.jpg')"
-              data-title="MEMORY"
-              data-desc="Guesss! Nemu dimanaa yaa 😋☝️"
-            ></div>
-            <div
-              class="poster-card-new clickable-poster"
-              style="background-image: url('8.png')"
-              data-title="MEMORY"
-              data-desc="EAAA POKOKNYA HBD!"
-            ></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="modal" id="epModal">
-      <div class="modal-card">
-        <div class="modal-media" id="modalMedia"></div>
-        <div class="modal-body">
-          <div class="modal-title" id="modalTitle">Title</div>
-          <div class="modal-desc" id="modalDesc">Description</div>
-          <div style="display: flex; gap: 10px; margin-top: 20px">
-            <button class="btn btn-red" id="modalNext">Next Photo ▶</button>
-            <button class="btn btn-ghost" id="modalClose" style="margin-top: 0">
-              Close
+          <div class="profile-grid" role="list">
+            <!-- Profile 1: Dynamic Honoree / Star Profile -->
+            <button
+              type="button"
+              class="profile-card"
+              id="profile-main"
+              data-profile-role="honoree"
+              role="listitem"
+            >
+              <div class="profile-avatar avatar-red">
+                <span class="profile-badge-vip">STAR</span>
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="profile-smiley" aria-hidden="true">
+                  <circle cx="33" cy="36" r="5.5" fill="white" />
+                  <circle cx="67" cy="36" r="5.5" fill="white" />
+                  <path d="M26 62 Q 50 82 74 62" stroke="white" stroke-width="5.5" stroke-linecap="round" fill="transparent" />
+                </svg>
+              </div>
+              <span class="profile-name" id="profileMainName">Guest of Honor</span>
+              <span class="profile-role-tag">Featured Honoree</span>
             </button>
+
+            <!-- Profile 2: Inner Circle / Best Friends -->
+            <button
+              type="button"
+              class="profile-card"
+              data-profile-role="friends"
+              data-profile-label="Inner Circle"
+              role="listitem"
+            >
+              <div class="profile-avatar avatar-blue">
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="profile-smiley" aria-hidden="true">
+                  <circle cx="33" cy="36" r="5.5" fill="white" />
+                  <circle cx="67" cy="36" r="5.5" fill="white" />
+                  <path d="M28 64 Q 50 78 72 64" stroke="white" stroke-width="5.5" stroke-linecap="round" fill="transparent" />
+                </svg>
+              </div>
+              <span class="profile-name">Inner Circle</span>
+              <span class="profile-role-tag">Friends &amp; Crew</span>
+            </button>
+
+            <!-- Profile 3: Family & VIPs -->
+            <button
+              type="button"
+              class="profile-card"
+              data-profile-role="family"
+              data-profile-label="Family & VIPs"
+              role="listitem"
+            >
+              <div class="profile-avatar avatar-gold">
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="profile-smiley" aria-hidden="true">
+                  <circle cx="33" cy="36" r="5.5" fill="white" />
+                  <circle cx="67" cy="36" r="5.5" fill="white" />
+                  <path d="M30 63 Q 50 80 70 63" stroke="white" stroke-width="5.5" stroke-linecap="round" fill="transparent" />
+                </svg>
+              </div>
+              <span class="profile-name">Family &amp; VIPs</span>
+              <span class="profile-role-tag">All-Access Pass</span>
+            </button>
+
+            <!-- Profile 4: Guest Viewer -->
+            <button
+              type="button"
+              class="profile-card"
+              data-profile-role="guest"
+              data-profile-label="Guest Viewer"
+              role="listitem"
+            >
+              <div class="profile-avatar avatar-emerald">
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="profile-smiley" aria-hidden="true">
+                  <circle cx="33" cy="36" r="5.5" fill="white" />
+                  <circle cx="67" cy="36" r="5.5" fill="white" />
+                  <path d="M30 65 Q 50 79 70 65" stroke="white" stroke-width="5.5" stroke-linecap="round" fill="transparent" />
+                </svg>
+              </div>
+              <span class="profile-name">Guest Viewer</span>
+              <span class="profile-role-tag">Instant Demo</span>
+            </button>
+          </div>
+
+          <div class="profiles-actions">
+            <button type="button" class="btn-nf-ghost" id="manageProfilesBtn">
+              Personalize Celebration Details
+            </button>
+            <button type="button" class="btn-nf-text" id="backToLoginBtn">
+              Back to Sign In
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 3: STREAMING DASHBOARD (#page-browse)
+      ========================================================== -->
+      <section id="page-browse" class="page" aria-label="Streaming Catalog">
+        <!-- BILLBOARD HERO -->
+        <div class="browse-hero" id="heroSection">
+          <div
+            class="hero-bg-image"
+            id="heroBgImage"
+            style="background-image: url('images/sparkler-celebration.jpg')"
+          ></div>
+          <div class="hero-bg-vignette"></div>
+
+          <div class="hero-content">
+            <h1 class="hero-logo-text" id="heroTitleDisplay">THE CELEBRATION SPECIAL</h1>
+
+            <div class="hero-top10-row">
+              <span class="top10-badge">TOP 10 TODAY</span>
+              <span class="top10-text" id="heroTop10Subtext">
+                #1 in Celebrations &amp; Milestones &bull; Memflix Original
+              </span>
+            </div>
+
+            <div class="hero-meta-pills">
+              <span class="meta-match">99% Match</span>
+              <span class="meta-year">2026</span>
+              <span class="meta-maturity" id="heroMaturityBadge">ALL AGES</span>
+              <span class="meta-season" id="heroSeasonBadge">LIMITED SERIES</span>
+              <span class="meta-hd">4K ULTRA HD</span>
+              <span class="meta-hd">DOLBY ATMOS</span>
+            </div>
+
+            <p class="hero-desc" id="heroSynopsisDisplay">
+              An unforgettable anthology of shared laughter, late-night conversations, and golden
+              milestones. Every episode captures the moments, friendships, and quiet victories that
+              turn ordinary days into a timeless story worth replaying.
+            </p>
+
+            <div class="hero-starring-line" id="heroStarringLine">
+              <span>Starring:</span>
+              <strong id="heroStarringName">Guest of Honor, Inner Circle &amp; Friends</strong>
+            </div>
+
+            <div class="hero-buttons">
+              <button type="button" class="btn-play-hero" id="heroPlayBtn">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24" aria-hidden="true">
+                  <path d="M6 4l15 8-15 8z"></path>
+                </svg>
+                <span>Play</span>
+              </button>
+              <button type="button" class="btn-info-hero" id="heroMoreInfoBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="22" height="22" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                <span>More Info</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- HORIZONTAL ROW CAROUSELS (16:9 WIDESCREEN) -->
+        <div class="browse-catalog">
+          <!-- ROW 1: EPISODES - SEASON HIGHLIGHTS -->
+          <section class="catalog-row" id="row-episodes" aria-labelledby="rowHeadingEpisodes">
+            <div class="row-header">
+              <div>
+                <h2 id="rowHeadingEpisodes" class="row-title">
+                  Season Highlights: <span id="rowSeasonSubtitle">Official Episode Guide</span>
+                </h2>
+              </div>
+              <div class="row-controls">
+                <button type="button" class="row-arrow" data-scroll-target="carousel-episodes" data-dir="-1" aria-label="Scroll Episodes Left">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+                <button type="button" class="row-arrow" data-scroll-target="carousel-episodes" data-dir="1" aria-label="Scroll Episodes Right">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="carousel-track" id="carousel-episodes">
+              <!-- Populated dynamically from js/app.js -->
+            </div>
+          </section>
+
+          <!-- ROW 2: TOP 10 MOMENTS TODAY -->
+          <section class="catalog-row" id="row-top10" aria-labelledby="rowHeadingTop10">
+            <div class="row-header">
+              <div>
+                <h2 id="rowHeadingTop10" class="row-title">
+                  Top 10 Moments Today
+                </h2>
+              </div>
+              <div class="row-controls">
+                <button type="button" class="row-arrow" data-scroll-target="carousel-top10" data-dir="-1" aria-label="Scroll Top 10 Left">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+                <button type="button" class="row-arrow" data-scroll-target="carousel-top10" data-dir="1" aria-label="Scroll Top 10 Right">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="carousel-track top10-track" id="carousel-top10">
+              <!-- Populated dynamically from js/app.js -->
+            </div>
+          </section>
+
+          <!-- ROW 3: MY LIST - CURATED KEEPSAKES -->
+          <section class="catalog-row" id="row-mylist" aria-labelledby="rowHeadingMyList">
+            <div class="row-header">
+              <div>
+                <h2 id="rowHeadingMyList" class="row-title">
+                  My List: Saved Celebration Specials
+                </h2>
+              </div>
+              <div class="row-controls">
+                <button type="button" class="row-arrow" data-scroll-target="carousel-mylist" data-dir="-1" aria-label="Scroll My List Left">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+                <button type="button" class="row-arrow" data-scroll-target="carousel-mylist" data-dir="1" aria-label="Scroll My List Right">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="carousel-track" id="carousel-mylist">
+              <!-- Populated dynamically from js/app.js -->
+            </div>
+          </section>
+        </div>
+
+        <!-- STREAMING FOOTER -->
+        <footer class="nf-footer" role="contentinfo">
+          <div class="nf-footer-inner">
+            <div class="nf-footer-brand">
+              <span class="nf-brand-text">MEMFLIX</span>
+              <p class="nf-footer-tagline">
+                Universal Memory &amp; Celebration Streaming Platform &bull; Built for timeless milestones.
+              </p>
+            </div>
+            <div class="nf-footer-links">
+              <button type="button" class="nf-footer-link" id="footerCustomizeBtn">Personalize URL</button>
+              <button type="button" class="nf-footer-link" id="footerProfilesBtn">Switch Profile</button>
+              <button type="button" class="nf-footer-link" id="footerFinaleBtn">Launch Grand Finale</button>
+              <a href="https://github.com/4jeeh/memflix" target="_blank" rel="noopener noreferrer" class="nf-footer-link">GitHub Repository</a>
+            </div>
+            <div class="nf-footer-copy">
+              <span>&copy; 2026 Memflix Open-Source Celebration Project &bull; MIT License</span>
+            </div>
+          </div>
+        </footer>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 4: INTERACTIVE CINEMA FEATURE PLAYER (#page-video)
+      ========================================================== -->
+      <section id="page-video" class="page" aria-labelledby="playerFeatureTitle">
+        <div class="cinema-player-shell">
+          <div class="cinema-topbar">
+            <button type="button" class="btn-nf-back" id="playerBackBtn">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+              </svg>
+              <span>Back to Browse</span>
+            </button>
+            <div class="cinema-now-playing">
+              <span class="nf-n-ribbon">M</span>
+              <span id="playerFeatureTitle">Now Playing: The Celebration Special</span>
+            </div>
+            <button type="button" class="btn-nf-ghost btn-sm" id="playerSkipToFinaleBtn">
+              Skip to Finale Fireworks &#9654;
+            </button>
+          </div>
+
+          <div class="cinema-viewport" id="cinemaViewport">
+            <div
+              class="cinema-slide-bg"
+              id="cinemaSlideBg"
+              style="background-image: url('images/sparkler-celebration.jpg')"
+            ></div>
+            <div class="cinema-vignette"></div>
+
+            <div class="cinema-caption-box">
+              <h2 class="cinema-slide-title" id="cinemaSlideTitle">THE CELEBRATION SPECIAL</h2>
+              <p class="cinema-chapter-pill" id="cinemaChapterPill">Chapter 1 of 4 &bull; The Golden Hour</p>
+              <p class="cinema-slide-subtitle" id="cinemaSlideSubtitle">
+                "Every great season is defined by the people who turn ordinary days into cinema."
+              </p>
+            </div>
+
+            <!-- End-of-Episode Overlay -->
+            <div class="cinema-end-overlay" id="videoOverlay">
+              <div class="cinema-end-card">
+                <h3 class="cinema-end-heading" id="cinemaEndHeading">Ready for the Grand Finale?</h3>
+                <p class="cinema-end-desc">
+                  Continue to the interactive celebration tribute and midnight fireworks display.
+                </p>
+                <div class="cinema-end-actions">
+                  <button type="button" class="btn-play-hero" id="toNextEp">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M6 4l15 8-15 8z"></path></svg>
+                    <span>Play Finale Fireworks</span>
+                  </button>
+                  <button type="button" class="btn-info-hero" id="videoReplay">
+                    <span>Replay Featurette</span>
+                  </button>
+                  <button type="button" class="btn-nf-ghost" id="videoBack">
+                    <span>Back to Browse</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cinema Player Controls Bar -->
+          <div class="cinema-controls-bar">
+            <button type="button" class="cinema-ctrl-btn" id="cinemaPlayPauseBtn" aria-label="Play or Pause">
+              <span id="cinemaPlayPauseLabel">Pause</span>
+            </button>
+            <button type="button" class="cinema-ctrl-btn" id="cinemaPrevSceneBtn" aria-label="Previous Scene">
+              Prev Chapter
+            </button>
+            <button type="button" class="cinema-ctrl-btn" id="cinemaNextSceneBtn" aria-label="Next Scene">
+              Next Chapter
+            </button>
+
+            <div class="cinema-progress-wrap" id="cinemaProgressWrap" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25">
+              <div class="cinema-progress-fill" id="cinemaProgressFill" style="width: 25%"></div>
+            </div>
+
+            <span class="cinema-timecode" id="cinemaTimecode">01 / 04</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SCREEN 5: GRAND FINALE & FIREWORKS (#page-finale)
+      ========================================================== -->
+      <section id="page-finale" class="page" aria-labelledby="finaleHeading">
+        <div class="ending-wrap">
+          <canvas id="fwCanvas" aria-hidden="true"></canvas>
+
+          <div class="ending-card">
+            <h1 id="finaleHeading" class="ending-title">
+              HERE'S TO <span id="endName">YOU</span>
+            </h1>
+
+            <p class="ending-series-tag" id="finaleMilestoneBadge">Season Finale &bull; Special Tribute</p>
+
+            <p class="ending-subtitle" id="finaleMessageText">
+              May this next chapter bring bold adventures, unforgettable wins, good health, and
+              stories worth streaming again and again.
+            </p>
+
+            <div class="ending-actions">
+              <button type="button" class="btn-play-hero" id="launchBurstBtn">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                  <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+                </svg>
+                <span>Launch Fireworks Encore</span>
+              </button>
+              <button type="button" class="btn-info-hero" id="finaleShareBtn">
+                <span>Personalize &amp; Share Link</span>
+              </button>
+              <button type="button" class="btn-nf-ghost" id="endingHome">
+                <span>Back to Browse</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- =========================================================
+         MODAL 1: EPISODE / MORE INFO DETAIL MODAL (#epModal)
+    ========================================================== -->
+    <div class="nf-modal" id="epModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true" data-ui="modal">
+      <div class="nf-modal-card">
+        <button type="button" class="nf-modal-close" id="modalClose" aria-label="Close Details Modal">
+          &times;
+        </button>
+
+        <div class="nf-modal-hero" id="modalMedia" style="background-image: url('images/golden-sunset.jpg')">
+          <div class="nf-modal-hero-vignette"></div>
+          <div class="nf-modal-hero-content">
+            <h2 class="nf-modal-title" id="modalTitle">The Golden Hour</h2>
+            <p class="nf-modal-badge-row">
+              <span class="nf-n-ribbon">M</span>
+              <span id="modalEpCode">Episode 1 &bull; 4K HDR</span>
+            </p>
+            <div class="nf-modal-hero-actions">
+              <button type="button" class="btn-play-hero btn-sm" id="modalPlayEpBtn">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M6 4l15 8-15 8z"></path></svg>
+                <span>Play Episode</span>
+              </button>
+              <button type="button" class="btn-info-hero btn-sm" id="modalToggleListBtn">
+                <span id="modalToggleListLabel">+ My List</span>
+              </button>
+              <button type="button" class="btn-nf-ghost btn-sm" id="modalNext">
+                <span>Next Episode &#9654;</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="nf-modal-body">
+          <div class="nf-modal-meta-row">
+            <span class="meta-match" id="modalMatch">99% Match</span>
+            <span class="meta-year">2026</span>
+            <span class="meta-maturity" id="modalDuration">24m</span>
+            <span class="meta-hd">HD</span>
+          </div>
+          <p class="nf-modal-desc" id="modalDesc">
+            Where the story begins: spontaneous plans, golden skies, and the spark of an unforgettable chapter.
+          </p>
+          <div class="nf-modal-credits">
+            <div><span>Starring:</span> <strong id="modalStarring">Guest of Honor &amp; Friends</strong></div>
+            <div><span>Genres:</span> <strong id="modalGenre">Heartwarming &bull; Milestone &bull; Anthology</strong></div>
           </div>
         </div>
       </div>
     </div>
 
-    <section id="page-video" class="page">
-      <div class="video-container">
-        <video id="ep4-video" controls playsinline>
-          <source
-            src="output(compress-video-online.com).mp4"
-            type="video/mp4"
-          />
-        </video>
-        <div class="video-overlay" id="videoOverlay">
-          <div
-            style="
-              color: #fff;
-              font-weight: 700;
-              font-size: 20px;
-              margin-bottom: 10px;
-              text-shadow: 0 2px 4px #000;
-            "
-          >
-            Episode 1 Finished
-          </div>
-          <button class="btn btn-red" id="videoReplay">Play Again</button>
-          <button
-            class="btn btn-ghost"
-            id="toNextEp"
-            style="
-              margin-top: 10px;
-              background: rgba(255, 255, 255, 0.2);
-              color: #fff;
-            "
-          >
-            Next Episode ▶
-          </button>
-          <button class="btn btn-ghost" id="videoBack" style="margin-top: 10px">
-            Back to Home
-          </button>
-        </div>
-      </div>
-    </section>
+    <!-- =========================================================
+         MODAL 2: URL CUSTOMIZER & SHARE GENERATOR (#customizerModal)
+    ========================================================== -->
+    <div class="nf-modal" id="customizerModal" role="dialog" aria-modal="true" aria-labelledby="customizerModalTitle" aria-hidden="true" data-ui="modal">
+      <div class="nf-modal-card nf-customizer-card">
+        <button type="button" class="nf-modal-close" id="closeCustomizerBtn" aria-label="Close Personalizer Modal">
+          &times;
+        </button>
 
-    <section id="page-found" class="page">
-      <div class="found-container">
-        <div class="found-video-wrapper">
-          <video id="ep5-video" controls playsinline loop muted>
-            <source src="Vid1.mp4" type="video/mp4" />
-          </video>
-        </div>
-        <div class="found-content">
-          <h1 class="found-title">You found your movie 🎬</h1>
-          <p class="found-desc">
-            Mungkin buat sekarang cuman ini ya kado nya - cuma serangkaian hal
-            kecil, pokoknya fineshyt satu ini sukses terus yaa, hope this year
-            treats you kindly_
+        <div class="nf-customizer-body">
+          <h2 class="nf-customizer-title" id="customizerModalTitle">Personalize Celebration Link</h2>
+          <p class="nf-customizer-sub">
+            Customize the recipient's name, billboard feature title, and milestone age. Memflix updates
+            dynamically via URL query parameters with zero code changes required.
           </p>
-          <div class="found-buttons">
-            <button class="btn btn-red" id="btn-continue">Continue ▶</button>
-            <button class="btn btn-ghost" id="btn-back-home">
-              Back to Home
-            </button>
-          </div>
+
+          <form id="customizerForm">
+            <div class="nf-field">
+              <label for="inputCustomName" class="nf-label">Honoree Name (<code>?name=</code>)</label>
+              <input
+                type="text"
+                id="inputCustomName"
+                placeholder="e.g., Alex Rivera"
+                maxlength="40"
+              />
+            </div>
+
+            <div class="nf-field">
+              <label for="inputCustomTitle" class="nf-label">Billboard Feature Title (<code>?title=</code>)</label>
+              <input
+                type="text"
+                id="inputCustomTitle"
+                placeholder="e.g., The Birthday Special"
+                maxlength="60"
+              />
+            </div>
+
+            <div class="nf-field">
+              <label for="inputCustomAge" class="nf-label">Milestone Age / Season (<code>?age=</code>)</label>
+              <input
+                type="number"
+                id="inputCustomAge"
+                placeholder="e.g., 20"
+                min="1"
+                max="120"
+              />
+            </div>
+
+            <div class="nf-url-preview-box">
+              <span class="nf-label">Shareable URL Preview</span>
+              <code id="shareUrlPreview">https://4jeeh.github.io/memflix/</code>
+            </div>
+
+            <div class="nf-customizer-actions">
+              <button type="submit" class="btn-nf-red">Apply &amp; Copy Share Link</button>
+              <button type="button" class="btn-nf-ghost" id="resetDefaultParamsBtn">
+                Reset to Universal Default
+              </button>
+            </div>
+            <p class="nf-copy-feedback" id="copyFeedbackMsg" aria-live="polite"></p>
+          </form>
         </div>
       </div>
-    </section>
+    </div>
 
-    <section id="page-5" class="page">
-      <div class="ending-wrap">
-        <canvas
-          id="fwCanvas"
-          style="position: absolute; inset: 0; pointer-events: none"
-        ></canvas>
-        <div class="ending-card">
-          <h1>
-            <span class="glitch"
-              >Happy Birthday <span id="endName">KAMU</span> 🎂</span
-            >
-          </h1>
-          <p>
-            Thanks for being my friend in this episode, the last happy 20 Jev !
-          </p>
-          <div
-            style="
-              margin-top: 20px;
-              display: flex;
-              gap: 10px;
-              justify-content: center;
-            "
-          >
-            <button class="btn btn-ghost" id="endingReplay">↺ Replay</button>
-            <button class="btn btn-red" id="endingHome">🏠 Home</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <script src="jev1.js"></script>
+    <script src="js/app.js"></script>
   </body>
 </html>
