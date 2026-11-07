@@ -8,13 +8,12 @@
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5)
 [![CSS3](https://img.shields.io/badge/CSS3_Streaming_UI-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 [![Vanilla JS](https://img.shields.io/badge/Vanilla_JS-F7DF1E?style=for-the-badge&logo=javascript&logoColor=141414)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-[![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-Live-E50914?style=for-the-badge&logo=github&logoColor=white)](https://4jeeh.github.io/memflix/)
 
 <p align="center">
   <em>"Turn any birthday, milestone, or friendship anthology into an interactive 4K celebration streaming special—personalized instantaneously via URL parameters."</em>
 </p>
 
-[🌐 **Live Demo (GitHub Pages)**](https://4jeeh.github.io/memflix/) · [🔗 **URL Customization Guide**](#-dynamic-url-customization) · [🚀 **Quick Start**](#-quick-start-local-development)
+[🔗 **URL Customization Guide**](#-dynamic-url-customization) · [🚀 **Quick Start**](#-quick-start-local-development)
 
 </div>
 
@@ -60,13 +59,13 @@ Personalize **Memflix** for any recipient, occasion, or milestone age by appendi
 
 - **Universal Default (No Parameters):**
   ```text
-  https://4jeeh.github.io/memflix/
+  https://<your-username>.github.io/memflix/
   ```
   *Displays **"The Celebration Special"** with a warm universal celebration synopsis.*
 
 - **Personalized Celebration Link:**
   ```text
-  https://4jeeh.github.io/memflix/?name=Alex&title=The+Birthday+Special&age=20
+  https://<your-username>.github.io/memflix/?name=Alex&title=The+Birthday+Special&age=20
   ```
   *Displays **"THE BIRTHDAY SPECIAL"**, starring **Alex**, with **SEASON 20 • MILESTONE EDITION** badges.*
 
@@ -133,7 +132,7 @@ memflix/
 3. Under **Build and deployment**, select **Deploy from a branch** (`main` / `/ (root)`).
 4. Your live streaming platform will be published at:
    ```text
-   https://4jeeh.github.io/memflix/
+   https://<your-username>.github.io/memflix/
    ```
 
 ---
